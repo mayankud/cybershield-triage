@@ -84,6 +84,10 @@ A portfolio project by [Mayank Udaywal](https://github.com/mayankud), based on a
 3. **Then the strategy and PRD.** Market, MVP scope, evals, roadmap and requirements are in [product-strategy.md](docs/product-strategy.md) and [PRD.md](docs/PRD.md). The remaining calls, like who buys first, how strict the engine should be and why it takes no automatic actions, are being added to the decision log one at a time.
 4. **Then the build.** This tool implements the PRD's P0 list. The [implementation status](docs/PRD.md#v1-implementation-status) table shows what was built, changed or deferred, and why.
 
+## How I used AI
+
+I used AI tools to write the code and draft the documents here. The product decisions are mine: what v1 does, what it leaves out, and the tradeoffs behind each call. Those are in the [decision log](docs/decisions.md), which I'm filling in one entry at a time.
+
 ## License
 
 MIT. Sample data is fictional. IP addresses use documentation ranges (RFC 5737) and domains use `.example` (RFC 2606).
