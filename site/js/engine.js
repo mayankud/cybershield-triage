@@ -1,6 +1,4 @@
-// CyberShield triage engine.
-// Pure functions only: no DOM, no network, no storage. Safe to unit test in Node.
-// Every verdict is explained by the signals that produced it.
+// Triage engine. No DOM or network here so it can be tested in Node.
 
 export const VERDICTS = ["mal", "rev", "ben"];
 export const LABEL = { mal: "Likely malicious", rev: "Needs review", ben: "Likely benign" };

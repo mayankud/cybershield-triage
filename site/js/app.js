@@ -1,9 +1,4 @@
-// CyberShield UI.
-// Security rules for this file:
-//  - Never assign HTML strings to the page. The page's Trusted Types policy blocks it anyway,
-//    and CI fails the build if any HTML string sink appears in this folder.
-//  - All text from uploads goes into the page with textContent (via the h() helper), so it can never run as code.
-//  - No network requests, no eval, no storage of alert data.
+// UI. Never put uploaded text into the page as HTML (CI checks for this).
 import { triage, summarise, caseKey, LABEL, VERDICTS, THRESHOLDS, SIGNAL_CATALOG } from "./engine.js";
 import { parseAlerts, normalize, toCSV, TEMPLATE_HEADERS, LIMITS, InputError } from "./parse.js";
 import { defaultContext } from "./context.js";
