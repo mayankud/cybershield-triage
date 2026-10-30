@@ -6,7 +6,7 @@ It runs entirely in the browser. There is no server, no API, no account and no t
 
 **Live demo:** https://mayankud.github.io/cybershield-triage/
 
-**Product docs:** [PRD](docs/PRD.md) · [Product strategy, market and roadmap](docs/product-strategy.md)
+**Product docs:** [Decision log](docs/decisions.md) · [PRD](docs/PRD.md) · [Product strategy, market and roadmap](docs/product-strategy.md)
 
 ![Alert queue](docs/screenshot-queue.png)
 
