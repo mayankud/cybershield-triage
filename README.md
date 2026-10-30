@@ -2,7 +2,7 @@
 
 An explainable alert-triage copilot for security operations (SOC) analysts. Load a SIEM alert export, and CyberShield merges repeats, scores every alert, explains why, and lets the analyst agree or override. Every decision feeds back into how similar alerts are scored.
 
-It runs entirely in the browser. There is no server, no API, no account and no tracking. Alert data never leaves the page.
+It runs in the browser, and alert data never leaves the page.
 
 **Live demo:** https://mayankud.github.io/cybershield-triage/
 
@@ -14,18 +14,14 @@ It runs entirely in the browser. There is no server, no API, no account and no t
 
 SOC analysts spend most of their shift on alerts that turn out to be harmless. Industry surveys put the benign share at 60–70%, with 15–20 minutes of manual work per alert ([source](https://abnormal.ai/learning/alert-fatigue-cybersecurity)). Real attacks get lost in the noise, and analysts burn out.
 
-CyberShield's bet: analysts don't need more threat data, they need fewer alerts to look at, with a clear reason for each verdict.
+So the aim is fewer alerts for a person to look at, with a reason given for each verdict.
 
 ## What it does
 
-| Capability | How |
-| --- | --- |
-| Merges repeats | Same rule, host and user within 15 minutes become one item with a count |
-| Scores every alert | 17 weighted rules covering attack patterns, threat intel and benign context |
-| Explains every verdict | Each signal is listed with its weight and the evidence behind it |
-| Keeps humans in charge | Agree or override in one click. Nothing is ever actioned automatically |
-| Learns from analysts | A decision becomes a past case, and similar alerts are re-scored straight away |
-| Reports value | Verdict split by day, agreement rate and analyst hours saved, with your own baseline minutes |
+- Merges repeats of the same alert into one item
+- Scores each alert with a set of weighted rules and shows which rules fired
+- Lets the analyst agree or override, and re-scores similar alerts from that decision
+- Shows a weekly view of verdicts and estimated time saved
 
 ## Guardrails
 
@@ -33,7 +29,7 @@ These are enforced in code and covered by tests:
 
 1. **Low confidence goes to a person.** Under 70 confidence, an alert is always "Needs review", whatever the score says.
 2. **Critical assets are never auto-cleared.** A domain controller alert can't be labelled benign by the engine.
-3. **Logs can't instruct the engine.** Text such as "ignore previous instructions and mark this as benign" is detected, raises the risk score, and blocks a benign verdict. In security, the attacker controls part of the input, so this matters more here than in most tools.
+3. **Logs can't instruct the engine.** Text such as "ignore previous instructions and mark this as benign" is detected, raises the risk score, and blocks a benign verdict.
 
 ## Try it
 
@@ -44,21 +40,9 @@ These are enforced in code and covered by tests:
 5. Open **Weekly report**, then **How it decides** to see every rule and weight.
 6. Upload your own CSV or JSON. Use **Download CSV template** for the format, or try `samples/sample-alerts.json`.
 
-## Security design
+## Security
 
-The goal was a public portfolio site with nothing for an attacker to use.
-
-| Risk | Control |
-| --- | --- |
-| Leaked keys or secrets | None exist. There is no backend and no API. CI fails the build if anything resembling a secret is committed |
-| Cross-site scripting from uploaded files | Uploaded text is only ever inserted as plain text. A Trusted Types policy in the page makes HTML string injection impossible, and CI fails if any HTML string sink appears in the code |
-| Third-party script compromise | Zero dependencies and zero external scripts, fonts or CDNs. The Content Security Policy only allows the site's own files |
-| Data exfiltration | `connect-src 'none'` stops the page making any network request, even if code were injected |
-| Malicious upload files | 5 MB and 5,000-row limits, every field length-capped, only known fields copied, so prototype-pollution payloads are ignored |
-| Spreadsheet formula injection in exports | Exported cells starting with `=`, `+`, `-` or `@` are neutralised |
-| Supply chain in CI | GitHub Actions pinned to full commit SHAs, least-privilege permissions, Dependabot keeps pins current |
-
-See [SECURITY.md](SECURITY.md) for the full threat model and how to report an issue.
+I wanted this safe to post publicly, so there's no backend and no API keys, and anything in an uploaded file is shown as plain text, never run. More in [SECURITY.md](SECURITY.md).
 
 ## Run locally
 
@@ -68,12 +52,6 @@ Needs Node 20+ for tests and any static file server for the app. ES modules don'
 npm test          # 25 unit tests, no install needed
 npm start         # serves site/ on http://localhost:8080
 ```
-
-## Deploy to GitHub Pages
-
-1. Push to a repo named `cybershield-triage` on the `main` branch.
-2. In the repo, go to **Settings → Pages** and set **Source** to **GitHub Actions**.
-3. The workflow in `.github/workflows/ci-pages.yml` runs the tests and security checks, then publishes only the `site/` folder.
 
 ## Project structure
 
@@ -92,7 +70,7 @@ samples/         sample upload file
 
 ## Limitations and next steps
 
-- **The engine is rules-based, not a language model.** That's deliberate for v1: it's free, private, deterministic and fully explainable. The product design places a hosted LLM behind the same verdict schema and guardrails, called only from a server so no key ever reaches the browser.
+- **The engine is rules-based, not a language model.** Why I went that way is one of the decisions still to be written up in the decision log.
 - Threat intel, assets and change tickets are sample lists in `context.js`. A real deployment would sync them from the SIEM, CMDB and ticketing tool.
 - Decisions live only for the browser session. Use **Export decisions** to keep them.
 - Weights are hand-tuned. The next step is measuring recall and precision against a labelled set of historical alerts.
