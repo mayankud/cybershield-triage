@@ -8,7 +8,7 @@
 
 CyberShield is an AI triage copilot for mid-market security teams and MSSPs. It reads every alert, matches it against threat intelligence and the customer's own environment, and tells the analyst which alerts are real, why, and what to do next.
 
-**The one bet:** GuardWare and most incumbents sell more threat data. Analysts already drown in data. CyberShield sells fewer, better decisions. We win on time-to-decision per alert, not on feed size.
+**Main idea:** GuardWare and most existing tools add more threat data. Analysts already have too much. CyberShield tries to reduce how many alerts a person has to look at.
 
 | Question | Answer |
 | --- | --- |
@@ -35,12 +35,12 @@ Security teams don't lack threat data. They lack time to turn alerts into decisi
 
 | Persona | Role | Job to be done | Top pain | What they pay for |
 | --- | --- | --- | --- | --- |
-| Priya, Tier 1 analyst | Works the alert queue | Clear the queue without missing a real attack | 150+ alerts a day, most noise, no context | Doesn't pay. Adoption depends on her trust in the verdicts |
-| Daniel, Head of SecOps | Runs a 4–8 person SOC | Cover more threats without hiring more analysts | Can't hire fast enough, analysts quit from burnout | Analyst hours saved, lower time to respond |
-| Meera, CISO | Reports risk to the board | Prove security spend reduces risk | Board asks for numbers she doesn't have | Risk metrics and a clean audit story |
-| Rahul, MSSP SOC lead | Runs SOC for 30+ client companies | Serve more clients per analyst | Margin falls as alert volume grows | Clients per analyst, gross margin |
+| Tier 1 analyst | Works the alert queue | Clear the queue without missing a real attack | 150+ alerts a day, most noise, no context | Doesn't pay. Adoption depends on her trust in the verdicts |
+| Head of SecOps | Runs a 4–8 person SOC | Cover more threats without hiring more analysts | Can't hire fast enough, analysts quit from burnout | Analyst hours saved, lower time to respond |
+| CISO | Reports risk to the board | Prove security spend reduces risk | Board asks for numbers she doesn't have | Risk metrics and a clean audit story |
+| MSSP SOC lead | Runs SOC for 30+ client companies | Serve more clients per analyst | Margin falls as alert volume grows | Clients per analyst, gross margin |
 
-**Primary target for v1:** Daniel at mid-market companies. He feels the pain daily, owns the budget line, and can approve a pilot without a 9-month procurement cycle. MSSPs are the Phase 3 expansion market.
+**Primary target for v1:** still open. See D2 in the [decision log](decisions.md).
 
 ## Market and competition
 
@@ -51,7 +51,7 @@ Security teams don't lack threat data. They lack time to turn alerts into decisi
 - SMEs are the fastest-growing segment
 - Lack of skilled analysts is named as the main brake on the market
 
-Other research firms size 2026 anywhere from about USD 8B to USD 19B depending on scope. Treat the number as directional. The growth rate and the SME shift are what matter here.
+Other research firms put 2026 anywhere from about USD 8B to USD 19B depending on what they count, so I wouldn't lean on the exact number.
 
 | Player type | Examples | What they sell | Weakness CyberShield exploits |
 | --- | --- | --- | --- |

@@ -40,7 +40,7 @@ This PRD covers what to build and how we'll know it works. Market, budget and ro
 
 ## Users and user stories
 
-Primary user is the Tier 1 analyst (Priya). Primary buyer is the Head of SecOps (Daniel). Personas are in the strategy doc.
+Primary user is the Tier 1 analyst. Primary buyer is still being decided (see the decision log).
 
 | # | As a… | I want to… | So that… | Acceptance criteria |
 | --- | --- | --- | --- | --- |
