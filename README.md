@@ -99,11 +99,12 @@ samples/         sample upload file
 
 ## How this was built
 
-A portfolio project by [Mayank Udaywal](https://github.com/mayankud), based on a product case study from a Coursera product management course. The work followed a PM's order:
+A portfolio project by [Mayank Udaywal](https://github.com/mayankud), based on a product case study from a Coursera product management course. The case pitched a broad threat-intelligence platform. I didn't start there.
 
-1. **Strategy first.** Narrowed a broad threat-intel idea to one job (alert triage) for one buyer (mid-market SecOps), with a RICE-scored MVP, eval plan and a budget ask gated on model accuracy. See [product-strategy.md](docs/product-strategy.md).
-2. **Then the PRD.** User stories, P0/P1 requirements, AI output schema, guardrails and a release bar. See [PRD.md](docs/PRD.md).
-3. **Then the build.** This tool implements the P0 list. The PRD's [implementation status](docs/PRD.md#v1-implementation-status) table shows what was built, changed or deferred, and why.
+1. **Started from the analyst.** I asked: when an alert lands, what does the analyst need to find out? Listing those questions showed two groups. Quick checks to sort an alert (is it real, how urgent, what next) take minutes and repeat on every alert. Deep work to solve an incident takes hours and is only needed for the few real ones.
+2. **Picked where the time goes.** Sorting is where analysts lose most of their day, so v1 does only that. Security teams call this step triage. The full reasoning, with the option I rejected, is in the [decision log](docs/decisions.md#d1-what-should-v1-actually-do).
+3. **Then the strategy and PRD.** Market, MVP scope, evals, roadmap and requirements are in [product-strategy.md](docs/product-strategy.md) and [PRD.md](docs/PRD.md). The remaining calls, like who buys first, how strict the engine should be and why it takes no automatic actions, are being added to the decision log one at a time.
+4. **Then the build.** This tool implements the PRD's P0 list. The [implementation status](docs/PRD.md#v1-implementation-status) table shows what was built, changed or deferred, and why.
 
 ## License
 
