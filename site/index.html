@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!-- Strict policy: only this site's own scripts and styles, no network calls, no inline script, no HTML string sinks. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; manifest-src 'none'; worker-src 'none'; require-trusted-types-for 'script'; trusted-types 'none'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="CyberShield: an explainable alert triage copilot for security analysts. Runs entirely in your browser.">
+  <title>CyberShield Triage</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 24'%3E%3Cpath d='M11 1 20 4.5v7C20 17 16 21 11 23 6 21 2 17 2 11.5v-7Z' fill='%232B55C9'/%3E%3C/svg%3E">
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-row">
+      <div class="brand">
+        <svg width="22" height="24" viewBox="0 0 22 24" aria-hidden="true"><path d="M11 1 L20 4.5 V11.5 C20 17 16 21 11 23 C6 21 2 17 2 11.5 V4.5 Z" fill="none" stroke="currentColor" class="brand-shield" stroke-width="2"/><path d="M7 12 L10 15 L15.5 8.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>CyberShield <small>Triage copilot</small></span>
+      </div>
+      <nav class="tabs" role="tablist" aria-label="Views">
+        <button class="tab" role="tab" type="button" id="tab-queue" data-view="queue" aria-controls="view-queue" aria-selected="true">Alert queue</button>
+        <button class="tab" role="tab" type="button" id="tab-report" data-view="report" aria-controls="view-report" aria-selected="false">Weekly report</button>
+        <button class="tab" role="tab" type="button" id="tab-context" data-view="context" aria-controls="view-context" aria-selected="false">How it decides</button>
+      </nav>
+      <span class="privacy" title="No data leaves this page">Runs in your browser · nothing is uploaded</span>
+    </div>
+  </header>
+
+  <main>
+    <section id="view-queue" class="wrap view" role="tabpanel" aria-labelledby="tab-queue">
+      <div class="toolbar">
+        <div class="dataset"><span class="dot" aria-hidden="true"></span><span id="dataset-name">No data loaded</span></div>
+        <div class="actions">
+          <button class="btn" type="button" id="btn-sample">Load sample data</button>
+          <label class="btn" for="file-input">Upload alerts (CSV or JSON)</label>
+          <input type="file" id="file-input" accept=".csv,.json,text/csv,application/json" class="visually-hidden">
+          <button class="btn" type="button" id="btn-template">Download CSV template</button>
+          <button class="btn" type="button" id="btn-export">Export decisions</button>
+        </div>
+      </div>
+      <div id="drop" class="drop" hidden>Drop a CSV or JSON file to triage it</div>
+      <p id="error" class="error" role="alert" hidden></p>
+      <div class="kpis" id="kpis"></div>
+      <div class="work">
+        <aside class="queue" aria-label="Alert queue">
+          <div class="queue-head">
+            <h2>Queue <span id="qcount"></span></h2>
+            <div class="chips" id="chips"></div>
+          </div>
+          <div id="list"></div>
+        </aside>
+        <article class="detail" id="detail" aria-live="polite"></article>
+      </div>
+    </section>
+
+    <section id="view-report" class="wrap view" role="tabpanel" aria-labelledby="tab-report" hidden>
+      <div class="report">
+        <div class="kpis" id="rkpis"></div>
+        <div class="rgrid">
+          <div class="panel">
+            <h2>Alerts by day and verdict</h2>
+            <p class="sub">Each item after duplicates are merged, placed on the day it first fired.</p>
+            <div class="chart-wrap"><svg class="chart" id="chart" role="img" aria-label="Alerts per day by verdict"></svg></div>
+            <div class="legend" id="legend"></div>
+          </div>
+          <div class="panel">
+            <h2>Time saved estimate</h2>
+            <p class="sub">Set your team's own numbers. The estimate is decided alerts × (minutes before − minutes with CyberShield).</p>
+            <div class="inputs">
+              <label for="min-before">Minutes per alert before<input id="min-before" type="number" min="1" max="240" step="0.5" value="17"></label>
+              <label for="min-after">Minutes per alert with CyberShield<input id="min-after" type="number" min="0" max="240" step="0.5" value="4"></label>
+            </div>
+            <table class="tbl" id="rtable"></table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-context" class="wrap view" role="tabpanel" aria-labelledby="tab-context" hidden>
+      <div class="report" id="context"></div>
+    </section>
+  </main>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <footer class="wrap foot">CyberShield is a portfolio project. Sample data is fictional. Verdicts come from an explainable rules engine, not a hosted AI model.</footer>
+</body>
+</html>
